@@ -60,7 +60,7 @@ namespace NasokiKoide.DXSuite
                         ApiKeyAuthenticationProvider.KeyLocation.Header
                     )
                 ),
-                $"https://{hostName}.dx-suite.com",
+                "{+baseurl}",
                 new Dictionary<string, object>())
         {
             ApiClientBuilder.RegisterDefaultSerializer<JsonSerializationWriterFactory>();
@@ -70,6 +70,10 @@ namespace NasokiKoide.DXSuite
             ApiClientBuilder.RegisterDefaultDeserializer<JsonParseNodeFactory>();
             ApiClientBuilder.RegisterDefaultDeserializer<TextParseNodeFactory>();
             ApiClientBuilder.RegisterDefaultDeserializer<FormParseNodeFactory>();
+
+            RequestAdapter.BaseUrl = $"https://{hostName}.dx-suite.com";
+
+            PathParameters.TryAdd("baseurl", RequestAdapter.BaseUrl);
         }
     }
 }
